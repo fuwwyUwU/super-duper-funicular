@@ -27,11 +27,30 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
     private void FixedUpdate()
     {
+        var OwO = Input.GetKey(KeyCode.Space);
+        var right = Input.GetKey(KeyCode.D);
+        var left = Input.GetKey(KeyCode.A);
 
+        if (OwO)
+        {
+            transform.Translate(Vector2.up * (movementSpeed * Time.deltaTime));
+        }
+
+
+        if (right)
+        {
+            transform.Rotate(Vector3.back * (rotationSpeed * Time.deltaTime));
+        }
+        else if (left)
+        {
+            transform.Rotate(Vector3.forward * (rotationSpeed * Time.deltaTime));
+        }
+        Debug.Log(left);
+        
     }
 }
