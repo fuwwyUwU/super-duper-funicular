@@ -8,8 +8,9 @@ public class Movement : MonoBehaviour
     float rotationSpeed = 200;
     public bool allowMovement;
     public bool moveForward;
-    float movementSpeed = 5;
+    [SerializeField] float movementSpeed = 5;
     float baseMovementSpeed = 5;
+    public float bosstedSpeed = 15;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            movementSpeed *= 1.5f;
+            movementSpeed = bosstedSpeed;
         }
         else
         {
