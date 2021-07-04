@@ -27,40 +27,11 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            movementSpeed = bosstedSpeed;
-        }
-        else
-        {
-            movementSpeed = baseMovementSpeed;
-        }
+
     }
 
     private void FixedUpdate()
     {
-        var rotate = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || allowMovement;
-        var move = moveForward || allowMovement;
 
-        if (rotate)
-        {
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.Rotate(Vector3.forward * (rotationSpeed * Time.deltaTime));
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                transform.Rotate(Vector3.back * (rotationSpeed * Time.deltaTime));
-            }
-
-        }
-
-        if (move)
-        {
-            rb.AddForce(Vector2.up * (movementSpeed * Time.deltaTime));
-        }
-
-        
-        
     }
 }
