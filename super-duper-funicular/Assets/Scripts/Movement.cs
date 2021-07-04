@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     float baseMovementSpeed = 5;
     public float bosstedSpeed = 15;
     Rigidbody2D rb;
+    [SerializeField] GameObject[] projectiles;
+    public int currentProjectile = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +40,10 @@ public class Movement : MonoBehaviour
 
         if (OwO)
         {
-            transform.Translate(Vector2.up * (movementSpeed * Time.deltaTime));
+            Instantiate(projectiles[currentProjectile], transform.position, transform.rotation);
         }
+
+        transform.Translate(Vector2.up * (movementSpeed * Time.deltaTime));
 
 
         if (right)
