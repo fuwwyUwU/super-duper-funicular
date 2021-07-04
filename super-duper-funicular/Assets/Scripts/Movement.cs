@@ -29,19 +29,22 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        Vector2 spawnProjectileAtt = new Vector2(transform.position.x, transform.position.y + (transform.rotation.z / 360));
+        var shooting = Input.GetKeyDown(KeyCode.Space);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            shoot(spawnProjectileAtt);
+        }
     }
 
     private void FixedUpdate()
     {
-        var OwO = Input.GetKey(KeyCode.Space);
+        var OwO = Input.GetKeyDown(KeyCode.Space);
         var right = Input.GetKey(KeyCode.D);
         var left = Input.GetKey(KeyCode.A);
 
-        if (OwO)
-        {
-            Instantiate(projectiles[currentProjectile], transform.position, transform.rotation);
-        }
+
 
         transform.Translate(Vector2.up * (movementSpeed * Time.deltaTime));
 
@@ -54,7 +57,12 @@ public class Movement : MonoBehaviour
         {
             transform.Rotate(Vector3.forward * (rotationSpeed * Time.deltaTime));
         }
-        Debug.Log(left);
+        Debug.Log("ran");
         
+    }
+
+    void shoot(Vector2 where)
+    {
+        Instantiate(projectiles[currentProjectile], where, transform.rotation);
     }
 }

@@ -5,7 +5,10 @@ using UnityEngine;
 public class Projectiles : MonoBehaviour
 {
 
-    float speed = 1;
+    float speed = 8;
+    float killAfter = 3;
+    float time = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +19,18 @@ public class Projectiles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        time += Time.deltaTime;
+
+        if (time > killAfter)
+        {
+            Destroy(gameObject);
+            
+        }
+
+        Debug.Log(time);
+
+
     }
 
     private void FixedUpdate()
