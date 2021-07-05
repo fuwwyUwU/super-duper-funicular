@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1834533848758352560}
   - component: {fileID: 1834533848758352461}
   - component: {fileID: 1834533848758352460}
+  - component: {fileID: -6174332384010467007}
+  - component: {fileID: 1987031694}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -98,19 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c102909b281c845b597816e03588db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 0
-  maxAmmo: 100
-  timeBetweenShoots: 0
   allowMovement: 1
   moveForward: 1
   movementSpeed: 5
-  projectile:
-  - {fileID: 5838262742086604895, guid: 21c170aaa4591944ab236bcfb1af63a6, type: 3}
-  - {fileID: 2562669831370808013, guid: 939bfa9f317f08149bde87b04d5e4b9e, type: 3}
-  - {fileID: 4876016887679667028, guid: 94383b00656899a4cb4d37ec7bb18615, type: 3}
-  currentProjectile: 1
-  ammoCost: 0
-  alloowshoot: 0
 --- !u!50 &1834533848758352461
 Rigidbody2D:
   serializedVersion: 4
@@ -148,6 +140,49 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-6174332384010467007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834533848758352561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d1b8adb3f55ac4fb7b173153d37a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoScreen: {fileID: 0}
+  projectile:
+  - {fileID: 5838262742086604895, guid: 21c170aaa4591944ab236bcfb1af63a6, type: 3}
+  - {fileID: 2562669831370808013, guid: 939bfa9f317f08149bde87b04d5e4b9e, type: 3}
+  - {fileID: 4876016887679667028, guid: 94383b00656899a4cb4d37ec7bb18615, type: 3}
+  currentProjectile: 2
+  ammoCost: 0
+  currentAmmo: 0
+  maxAmmo: 100
+  timeBetweenShoots: 1
+  alloowshoot: 0
+--- !u!114 &1987031694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834533848758352561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d1b8adb3f55ac4fb7b173153d37a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoScreen: {fileID: 0}
+  projectile: []
+  currentProjectile: 1
+  ammoCost: 0
+  currentAmmo: 0
+  maxAmmo: 100
+  timeBetweenShoots: 1
+  alloowshoot: 0
 --- !u!1 &1834533849280083846
 GameObject:
   m_ObjectHideFlags: 0

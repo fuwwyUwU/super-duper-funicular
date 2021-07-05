@@ -7,12 +7,13 @@ public class Projectiles : MonoBehaviour
 
     [SerializeField] float speed = 1;
     [SerializeField] float killAfter = 3;
-    public float ammoCost;
-    public float betweenShoots; 
+    public float ammoCost = 0;
+    public float betweenShoots = 0;
     float time = 0;
     ProjectilePowers powers;
-    
-    
+    bool test = true;
+
+
     [SerializeField] float projectileDamage = 1;
 
 
@@ -32,13 +33,13 @@ public class Projectiles : MonoBehaviour
     {
 
         // timer for when to destroy the object
-        
+
         time += Time.deltaTime;
 
         if (time > killAfter)
         {
             Destroy(gameObject);
-            
+
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -57,7 +58,7 @@ public class Projectiles : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Projecile"))
+        if (collision.gameObject.CompareTag("Projectile"))
         {
             Destroy(gameObject);
         }
@@ -65,7 +66,7 @@ public class Projectiles : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         //gets the health of the object it collided with
         Health _health = collision.gameObject.GetComponent<Health>();
         //logs that it collided
@@ -80,8 +81,9 @@ public class Projectiles : MonoBehaviour
 
 
         }
-        
+
         //destroys itself
         Destroy(gameObject);
     }
 }
+

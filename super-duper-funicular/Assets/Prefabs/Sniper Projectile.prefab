@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5007538064017776335}
   - component: {fileID: 1864154052925596114}
   - component: {fileID: -6193860843691525643}
+  - component: {fileID: 2364453400989984065}
   m_Layer: 7
   m_Name: Sniper Projectile
   m_TagString: Projectile
@@ -153,3 +154,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloneBool: 0
+--- !u!114 &2364453400989984065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562669831370808013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0ed1fb048e05c498b0dbebc269aa36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  killAfter: 3
+  ammoCost: 0
+  betweenShoots: 0
+  projectileDamage: 1

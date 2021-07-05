@@ -5,14 +5,16 @@ using TMPro;
 public class Shooting : MonoBehaviour
 {
 
-    [SerializeField] TextMeshProUGUI ammoScreen;
+    [SerializeField] TextMeshProUGUI ammoScreenn;
+    Rigidbody2D rb;
     Rigidbody2D _rb;
     [SerializeField] GameObject[] projectile;
     public int currentProjectile = 1;
+    GameObject projectileSpawner;
     [SerializeField] float ammoCost;
     List<GameObject> shootAt;
-    [SerializeField] float currentAmmo;
-    [SerializeField] int maxAmmo = 100;
+    [SerializeField] float currentAmmo = 0;
+    [SerializeField] float maxAmmo = 100;
     [SerializeField] float timeBetweenShoots = 1;
     float timeToReload = 0;
     [SerializeField] bool alloowshoot;
@@ -24,32 +26,43 @@ public class Shooting : MonoBehaviour
         //creats a list of positions where do projectiles will be instansiated
         shootAt = new List<GameObject>();
 
-        //adds all the locations it can be instansiated at
-        foreach (GameObject spawnPoint in GameObject.FindGameObjectsWithTag("Projectile Spawnpoint"))
-        {
+        foreach (GameObject fooObj in GameObject.FindGameObjectsWithTag("Projectile Spawnpoint"))
+            //adds all the locations it can be instansiated at
+            foreach (GameObject spawnPoint in GameObject.FindGameObjectsWithTag("Projectile Spawnpoint"))
+            {
 
-            shootAt.Add(spawnPoint );
+                shootAt.Add(fooObj);
+                shootAt.Add(spawnPoint);
 
-        }
+            }
 
         //fills up the ammo
         currentAmmo = maxAmmo;
 
         //changes the projectile
-        ChangeProjectile(currentProjectile);
+        ChangeProjectile(1);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        rb = GetComponent<Rigidbody2D>();
+        projectileSpawner = GameObject.Find("Projectle Spawn Point");
+        if (projectileSpawner != null)
+        {
+            Debug.Log("fpund dhild");
+        }
+
         //sets rp the to rigidbody2d
         _rb = GetComponent<Rigidbody2D>();
-        
+
         //reload
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(Reload(timeToReload, maxAmmo));
         }
+
 
         //changes the projectile (WIP)
         if (Input.GetKeyDown(KeyCode.Z))
@@ -65,27 +78,29 @@ public class Shooting : MonoBehaviour
             ChangeProjectile(2);
         }
 
+
         //checks if u are shooting
         var shooting = Input.GetKey(KeyCode.Space);
 
         //if you are pressing space, shoot
         if (!alloowshoot) return;
         else if (shooting && currentAmmo >= ammoCost) //checks if you have enougth ammo to shoot
-        {
+                {
 
-            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Projectile Spawnpoint").Length; i++)
-            {
-                //shoots a projectile att every projectile spawnpoint
-                shoot(shootAt[i].transform.position);
-                StartCoroutine(allowProjectile());
-                alloowshoot = false;
-            }
-            //remvoes the ammo you spend
-            currentAmmo -= ammoCost;
-        }
+                    for (int i = 0; i < GameObject.FindGameObjectsWithTag("Projectile Spawnpoint").Length; i++)
+                    {
+                        //shoots a projectile att every projectile spawnpoint
+                        shoot(shootAt[i].transform.position);
+                        StartCoroutine(allowProjectile());
+                        alloowshoot = false;
+                    }
+                    //remvoes the ammo you spend
+                    currentAmmo -= ammoCost;
+                }
+
 
         //updates the ammo counter
-        ammoScreen.text = "Ammo: " + currentAmmo;
+        ammoScreenn.text = "Ammo: " + currentAmmo;
     }
 
     void shoot(Vector2 where)
@@ -98,9 +113,10 @@ public class Shooting : MonoBehaviour
     public void ChangeProjectile(int changeTo)
     {
         currentProjectile = changeTo;
-        Projectiles _projectileProperties;
+        Projectiles _projectileProperties = projectile[changeTo].gameObject.GetComponent<Projectiles>(); ;
+
         currentProjectile = changeTo;
-        _projectileProperties = projectile[changeTo].gameObject.GetComponent<Projectiles>();
+        
         ProjectileChange(changeTo, _projectileProperties);
 
 
@@ -111,6 +127,7 @@ public class Shooting : MonoBehaviour
     //allows you to shoot again
     IEnumerator allowProjectile()
     {
+        Debug.Log("ran");
         yield return new WaitForSeconds(timeBetweenShoots);
         alloowshoot = true;
     }
@@ -121,10 +138,11 @@ public class Shooting : MonoBehaviour
 
         ammoCost = _project.ammoCost;
         timeBetweenShoots = _project.betweenShoots;
+        Debug.Log(ammoCost);
     }
 
     //reloads
-    IEnumerator Reload(float reloadTime, int reloadAmount)
+    IEnumerator Reload(float reloadTime, float reloadAmount)
     {
         yield return new WaitForSeconds(reloadTime);
         currentAmmo += reloadAmount;
