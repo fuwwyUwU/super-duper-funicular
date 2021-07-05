@@ -97,9 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ed1fb048e05c498b0dbebc269aa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  killAfter: 0.1
-  projectileDamage: 10
+  speed: 20
+  killAfter: 2
+  ammoCost: 0
+  betweenShoots: 0.1
+  projectileDamage: 10000
 --- !u!70 &5007538064017776335
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

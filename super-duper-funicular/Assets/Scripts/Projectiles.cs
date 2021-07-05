@@ -7,6 +7,8 @@ public class Projectiles : MonoBehaviour
 
     [SerializeField] float speed = 1;
     [SerializeField] float killAfter = 3;
+    public int ammoCost;
+    public float betweenShoots;
     float time = 0;
     
     

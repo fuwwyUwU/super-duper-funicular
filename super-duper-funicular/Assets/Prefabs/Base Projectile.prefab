@@ -99,6 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   killAfter: 3
+  ammoCost: 0
+  betweenShoots: 0
   projectileDamage: 1
 --- !u!58 &9214019429265330402
 CircleCollider2D:

@@ -6,21 +6,34 @@ public class Movement : MonoBehaviour
 {
 
     float rotationSpeed = 200;
+    [SerializeField] int currentAmmo;
+    [SerializeField] int maxAmmo = 100;
+    [SerializeField] float timeBetweenShoots = 1;
     public bool allowMovement;
     public bool moveForward;
     [SerializeField] float movementSpeed = 5;
     float baseMovementSpeed = 5;
-    public float bosstedSpeed = 15;
     Rigidbody2D rb;
-    [SerializeField] GameObject[] projectiles;
-    public int currentProjectile = 1; 
+    [SerializeField] GameObject[] projectile;
+    public int currentProjectile = 1;
     GameObject projectileSpawner;
+    int ammoCost;
+    [SerializeField] bool alloowshoot;
+    List<GameObject> shootAt;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        alloowshoot = true;
+        shootAt = new List<GameObject>();
+
+        foreach (GameObject fooObj in GameObject.FindGameObjectsWithTag("Projectile Spawnpoint"))
+        {
+
+           shootAt.Add(fooObj);
+        }
     }
+
 
     private void Awake()
     {
@@ -35,23 +48,34 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        var shooting = Input.GetKey(KeyCode.Space); 
 
-        if (shooting) 
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            shoot(projectileSpawner.transform.position); 
-            movementSpeed = 0;
+            ChangeProjectile(0);
         }
-        else if (movementSpeed == 0)
+        else if (Input.GetKeyDown(KeyCode.X))
         {
-            movementSpeed = baseMovementSpeed;
+            ChangeProjectile(1);
+        }
+
+
+        var shooting = Input.GetKey(KeyCode.Space);
+
+        if (!alloowshoot) return;
+        else if (shooting)
+        {
+            
+           for (int i = 0; i < GameObject.FindGameObjectsWithTag("Projectile Spawnpoint").Length; i++)
+            {
+                shoot(shootAt[i].transform.position);
+                StartCoroutine(allowProjectile());
+                alloowshoot = false;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        var OwO = Input.GetKeyDown(KeyCode.Space);
         var right = Input.GetKey(KeyCode.D);
         var left = Input.GetKey(KeyCode.A);
 
@@ -68,12 +92,38 @@ public class Movement : MonoBehaviour
         {
             transform.Rotate(Vector3.forward * (rotationSpeed * Time.deltaTime));
         }
-        Debug.Log("ran");
-        
+
     }
 
     void shoot(Vector2 where)
     {
-        Instantiate(projectiles[currentProjectile], where, transform.rotation);
+        Instantiate(projectile[currentProjectile], where, transform.rotation);
+    }
+
+    public void ChangeProjectile(int changeTo)
+    {
+        currentProjectile = changeTo;
+        Projectiles _projectileProperties;
+        currentProjectile = changeTo;
+        _projectileProperties = projectile[changeTo].gameObject.GetComponent<Projectiles>();
+        ProjectileChange(changeTo, _projectileProperties);
+
+
+
+
+    }
+
+    IEnumerator allowProjectile()
+    {
+        Debug.Log("ran");
+        yield return new WaitForSeconds(timeBetweenShoots);
+        alloowshoot = true;
+    }
+
+    void ProjectileChange(int changeToWhat, Projectiles project)
+    {
+
+        ammoCost = project.ammoCost;
+        timeBetweenShoots = project.betweenShoots;
     }
 }

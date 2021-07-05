@@ -98,14 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c102909b281c845b597816e03588db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAmmo: 0
+  maxAmmo: 100
+  timeBetweenShoots: 0
   allowMovement: 1
   moveForward: 1
   movementSpeed: 5
-  bosstedSpeed: 60
-  projectiles:
+  projectile:
   - {fileID: 5838262742086604895, guid: 21c170aaa4591944ab236bcfb1af63a6, type: 3}
   - {fileID: 2562669831370808013, guid: 939bfa9f317f08149bde87b04d5e4b9e, type: 3}
   currentProjectile: 1
+  alloowshoot: 0
 --- !u!50 &1834533848758352461
 Rigidbody2D:
   serializedVersion: 4
@@ -203,6 +206,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 1, z: 1}
   m_Children:
   - {fileID: 1834533849280083841}
+  - {fileID: 3149326074425630832}
   m_Father: {fileID: 1834533848758352562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -283,3 +287,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &5115783157078515134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3149326074425630832}
+  m_Layer: 6
+  m_Name: Projectle Spawn Point (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3149326074425630832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115783157078515134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.572, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1834533849534593744}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
