@@ -5,8 +5,8 @@ using UnityEngine;
 public class Projectiles : MonoBehaviour
 {
 
-    float speed = 8;
-    float killAfter = 3;
+    [SerializeField] float speed = 1;
+    [SerializeField] float killAfter = 3;
     float time = 0;
     
     
@@ -42,17 +42,22 @@ public class Projectiles : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         Health _health = collision.gameObject.GetComponent<Health>();
         Debug.Log("collided");
 
         if (_health == null) return;
-        else 
+        else
         {
             _health.ChangeHealth(projectileDamage);
 
 
         }
         Destroy(gameObject);
-
     }
 }

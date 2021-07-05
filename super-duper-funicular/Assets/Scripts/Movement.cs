@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     public float bosstedSpeed = 15;
     Rigidbody2D rb;
     [SerializeField] GameObject[] projectiles;
-    public int currentProjectile = 0;
+    public int currentProjectile = 1; 
     GameObject projectileSpawner;
 
     // Start is called before the first frame update
@@ -36,11 +36,16 @@ public class Movement : MonoBehaviour
     void Update()
     {
         
-        var shooting = Input.GetKeyDown(KeyCode.Space);
+        var shooting = Input.GetKey(KeyCode.Space); 
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (shooting) 
         {
-            shoot(projectileSpawner.transform.position);
+            shoot(projectileSpawner.transform.position); 
+            movementSpeed = 0;
+        }
+        else if (movementSpeed == 0)
+        {
+            movementSpeed = baseMovementSpeed;
         }
     }
 
