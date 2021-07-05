@@ -31,7 +31,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //restart
         var restart = Input.GetKeyDown(KeyCode.Tab);
         
         if (restart)
@@ -45,14 +45,15 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //looks for a or d input
         var right = Input.GetKey(KeyCode.D);
         var left = Input.GetKey(KeyCode.A);
 
 
-
+        //moves the player forward
         transform.Translate(Vector2.up * (movementSpeed * Time.deltaTime));
 
-
+        //turning
         if (right)
         {
             transform.Rotate(Vector3.back * (rotationSpeed * Time.deltaTime));

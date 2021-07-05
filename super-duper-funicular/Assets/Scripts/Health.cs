@@ -6,13 +6,15 @@ public class Health : MonoBehaviour
 {
 
     public float health;
-    float testhealth;
+    float timeBefore;
     public float maxHealth = 5;
-    float testheath2;
+    float timeAfter;
 
     private void Awake()
     {
+        //sets the health to your maxhealth
         health = maxHealth;
+        //updates the dps every second
         InvokeRepeating("DPS", 1, 1);   
     }
 
@@ -23,12 +25,17 @@ public class Health : MonoBehaviour
         if (health <= 0) Destroy(gameObject);
     }
 
+    //calulates dps
     void DPS()
     {
-        testheath2 = health;
-        testheath2 -= testhealth;
-        Debug.Log(testheath2);
-         testhealth = health;
+        //health from this second
+        timeBefore = health;
+        //current health minus health from last second
+        timeBefore -= timeAfter;
+        //logs the dps
+        Debug.Log(timeBefore * -1);
+        //sets the health for the next second 
+        timeAfter = health;
     }
 
 
