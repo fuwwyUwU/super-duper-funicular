@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] GameObject[] projectiles;
     public int currentProjectile = 0;
+    GameObject projectileSpawner;
 
     // Start is called before the first frame update
     void Start()
@@ -24,17 +25,22 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        projectileSpawner = GameObject.Find("Projectle Spawn Point");
+        if (projectileSpawner != null)
+        {
+            Debug.Log("fpund dhild");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 spawnProjectileAtt = new Vector2(transform.position.x, transform.position.y + (transform.rotation.z / 360));
+        
         var shooting = Input.GetKeyDown(KeyCode.Space);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            shoot(spawnProjectileAtt);
+            shoot(projectileSpawner.transform.position);
         }
     }
 
