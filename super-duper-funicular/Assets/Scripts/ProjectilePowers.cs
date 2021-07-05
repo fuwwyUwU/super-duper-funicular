@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class ProjectilePowers : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool cloneBool;
+
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Clone()
     {
-        
+        Instantiate(gameObject);
     }
+
+
+
+
 }

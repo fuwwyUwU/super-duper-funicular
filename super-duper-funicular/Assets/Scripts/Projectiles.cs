@@ -10,10 +10,16 @@ public class Projectiles : MonoBehaviour
     public float ammoCost;
     public float betweenShoots; 
     float time = 0;
+    ProjectilePowers powers;
     
     
     [SerializeField] float projectileDamage = 1;
 
+
+    private void Awake()
+    {
+        powers = GetComponent<ProjectilePowers>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +41,11 @@ public class Projectiles : MonoBehaviour
             
         }
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            powers.Clone();
+        }
+
     }
 
     private void FixedUpdate()
@@ -46,7 +57,10 @@ public class Projectiles : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-
+        if (collision.gameObject.CompareTag("Projecile"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

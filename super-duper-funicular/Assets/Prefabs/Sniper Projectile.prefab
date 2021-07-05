@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4101853567142976976}
   - component: {fileID: 5007538064017776335}
   - component: {fileID: 1864154052925596114}
+  - component: {fileID: -6193860843691525643}
   m_Layer: 7
   m_Name: Sniper Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,3 +140,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-6193860843691525643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562669831370808013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11eb11b19228454ca34ec65810aad25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloneBool: 0
