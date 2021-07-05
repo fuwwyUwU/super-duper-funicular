@@ -49,6 +49,16 @@ public class Movement : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Application.targetFrameRate = 1;
+        }
+        else
+        {
+            Application.targetFrameRate = 60;
+        }
+        
+        
         if (Input.GetKeyDown(KeyCode.Z))
         {
             ChangeProjectile(0);
