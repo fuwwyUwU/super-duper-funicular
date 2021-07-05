@@ -8,6 +8,9 @@ public class Projectiles : MonoBehaviour
     float speed = 8;
     float killAfter = 3;
     float time = 0;
+    
+    
+    [SerializeField] float projectileDamage = 1;
 
 
     // Start is called before the first frame update
@@ -28,7 +31,6 @@ public class Projectiles : MonoBehaviour
             
         }
 
-        Debug.Log(time);
 
 
     }
@@ -36,5 +38,21 @@ public class Projectiles : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(Vector2.up * (speed * Time.deltaTime));
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Health _health = collision.gameObject.GetComponent<Health>();
+        Debug.Log("collided");
+
+        if (_health == null) return;
+        else 
+        {
+            _health.ChangeHealth(projectileDamage);
+
+
+        }
+        Destroy(gameObject);
+
     }
 }
