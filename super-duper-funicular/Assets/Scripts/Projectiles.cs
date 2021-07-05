@@ -33,8 +33,6 @@ public class Projectiles : MonoBehaviour
             
         }
 
-
-
     }
 
     private void FixedUpdate()

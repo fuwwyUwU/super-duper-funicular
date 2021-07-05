@@ -100,7 +100,7 @@ MonoBehaviour:
   speed: 8
   killAfter: 3
   ammoCost: 1
-  betweenShoots: 0
+  betweenShoots: 0.2
   projectileDamage: 1
 --- !u!58 &9214019429265330402
 CircleCollider2D:

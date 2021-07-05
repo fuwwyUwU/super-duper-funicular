@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
 
     public float health;
     float testhealth;
-    [SerializeField] float maxHealth = 5;
+    public float maxHealth = 5;
     float testheath2;
 
     private void Awake()
