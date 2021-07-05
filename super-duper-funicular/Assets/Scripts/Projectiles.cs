@@ -7,8 +7,8 @@ public class Projectiles : MonoBehaviour
 
     [SerializeField] float speed = 1;
     [SerializeField] float killAfter = 3;
-    public int ammoCost;
-    public float betweenShoots;
+    public float ammoCost;
+    public float betweenShoots; 
     float time = 0;
     
     
@@ -18,7 +18,7 @@ public class Projectiles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

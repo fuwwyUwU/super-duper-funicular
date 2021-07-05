@@ -99,9 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   killAfter: 2
-  ammoCost: 0
+  ammoCost: 3
   betweenShoots: 1
-  projectileDamage: 10
+  projectileDamage: 100
 --- !u!70 &5007538064017776335
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

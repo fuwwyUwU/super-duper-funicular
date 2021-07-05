@@ -13,7 +13,6 @@ public class Health : MonoBehaviour
     private void Awake()
     {
         health = maxHealth;
-        Application.targetFrameRate = 1;
         InvokeRepeating("DPS", 1, 1);   
     }
 
