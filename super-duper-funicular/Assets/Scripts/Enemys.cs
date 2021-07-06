@@ -18,6 +18,7 @@ public class Enemys : MonoBehaviour
     void Update()
     {
         healthText.text = "" + hp.health + "/" + hp.maxHealth;
+        transform.Translate(Vector2.left / 25);
     }
 
     private void Awake()

@@ -41,11 +41,6 @@ public class Projectiles : MonoBehaviour
             Destroy(gameObject);
 
         }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            powers.Clone();
-        }
         
     }
 

@@ -16,6 +16,8 @@ public class Shooting : MonoBehaviour
     [SerializeField] float timeBetweenShoots = 1;
     float timeToReload = 0;
     [SerializeField] bool alloowshoot;
+    Movement _playerMovement;
+    bool shooting = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,41 +54,45 @@ public class Shooting : MonoBehaviour
         ChangeProjectile(1);
     }
 
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _playerMovement = GetComponent<Movement>();
+        _playerMovement.controls.Player.Shoot.performed += ctx => ShootingInputHandler(ctx.ReadValue<float>());  
+        _playerMovement.controls.Player.Reload.performed += ctx => Reload(); 
+    }
+
+    void ShootingInputHandler(float pressed)
+    {
+        Debug.Log(pressed);
+
+        if (pressed != 0)
+        {
+            shooting = true;    
+
+        }
+        else
+        {
+            shooting = false;
+        }
+
+    }
+
+    
+    void Reload()
+    {
+        //reload    
+        StartCoroutine(Reload(timeToReload, maxAmmo));
+        ChangeProjectile(currentProjectile);
+    }
+    
     // Update is called once per frame
     void Update()
     {
         
-        _rb = GetComponent<Rigidbody2D>();
-
-        //sets rp the to rigidbody2d
-        _rb = GetComponent<Rigidbody2D>();
-
-        //reload
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(Reload(timeToReload, maxAmmo));
-        }
 
 
-        //changes the projectile (WIP)
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ChangeProjectile(0);
-        }
-        else if (Input.GetKeyDown(KeyCode.X))
-        {
-            ChangeProjectile(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Y))
-        {
-            ChangeProjectile(2);
-        }
-
-
-        //checks if u are shooting
-        var shooting = Input.GetKey(KeyCode.Space);
-
-        //if you are pressing space, shoot
+        //if you are pressing shooting, shoot
         if (!alloowshoot) return;
         else if (shooting && currentAmmo >= ammoCost) //checks if you have enougth ammo to shoot
                 {
@@ -121,18 +127,8 @@ public class Shooting : MonoBehaviour
 
         currentProjectile = changeTo;
 
-        if (_projectileProperties != null) Debug.Log("worked");
         
         ProjectileChange(changeTo, _projectileProperties);
-
-        if (changeTo != 0) Debug.Log("worrrrrrked");
-
-
-
-
-
-
-
     }
 
     //allows you to shoot again

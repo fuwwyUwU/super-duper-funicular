@@ -41,13 +41,13 @@ public class Movement : MonoBehaviour
 
         controls = new InputMaster();
         controls.Player.Movement.performed += ctx => MovementInputHandler(ctx.ReadValue<float>());
-        
+
+
 
     }
 
     void MovementInputHandler(float where)
     {
-        Debug.Log(where);
 
        if (where != 0)
         {
@@ -64,6 +64,11 @@ public class Movement : MonoBehaviour
         
 
 
+    }
+
+    void Test(float flo)
+    {
+        Debug.Log(flo);
     }
 
     // Update is called once per frame
