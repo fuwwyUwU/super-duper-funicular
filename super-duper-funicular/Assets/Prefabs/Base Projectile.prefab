@@ -98,10 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ed1fb048e05c498b0dbebc269aa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 8
   killAfter: 3
   ammoCost: 1
-  betweenShoots: -1
+  betweenShoots: 0.2
   projectileDamage: 1
 --- !u!58 &9214019429265330402
 CircleCollider2D:

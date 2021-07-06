@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ed1fb048e05c498b0dbebc269aa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  killAfter: 1
+  speed: 20
+  killAfter: 0.3
   ammoCost: 0
   betweenShoots: 0.1
   projectileDamage: 20

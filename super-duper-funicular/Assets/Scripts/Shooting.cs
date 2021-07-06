@@ -9,7 +9,6 @@ public class Shooting : MonoBehaviour
     Rigidbody2D _rb;
     [SerializeField] GameObject[] projectile;
     public int currentProjectile = 1;
-    GameObject projectileSpawner;
     [SerializeField] float ammoCost;
     List<GameObject> shootAt;
     [SerializeField] float currentAmmo = 0;
@@ -25,15 +24,26 @@ public class Shooting : MonoBehaviour
         //creats a list of positions where do projectiles will be instansiated
         shootAt = new List<GameObject>();
 
-        foreach (GameObject fooObj in GameObject.FindGameObjectsWithTag("Projectile Spawnpoint"))
             //adds all the locations it can be instansiated at
-            foreach (GameObject spawnPoint in GameObject.FindGameObjectsWithTag("Projectile Spawnpoint"))
+
+
+        foreach (Transform transform in gameObject.transform)
+        {
+            if (transform.CompareTag("Projectile Spawnpoint"))
             {
-
-                shootAt.Add(fooObj);
-                shootAt.Add(spawnPoint);
-
+                shootAt.Add(transform.gameObject);
             }
+
+        }    
+        
+        
+        //fills up the ammo
+            currentAmmo = maxAmmo;
+
+            //changes the projectile
+            ChangeProjectile(1);
+        
+
 
         //fills up the ammo
         currentAmmo = maxAmmo;
@@ -47,11 +57,6 @@ public class Shooting : MonoBehaviour
     {
         
         _rb = GetComponent<Rigidbody2D>();
-        projectileSpawner = GameObject.Find("Projectle Spawn Point");
-        if (projectileSpawner != null)
-        {
-            Debug.Log("fpund dhild");
-        }
 
         //sets rp the to rigidbody2d
         _rb = GetComponent<Rigidbody2D>();
@@ -86,10 +91,10 @@ public class Shooting : MonoBehaviour
         else if (shooting && currentAmmo >= ammoCost) //checks if you have enougth ammo to shoot
                 {
 
-                    for (int i = 0; i < GameObject.FindGameObjectsWithTag("Projectile Spawnpoint").Length; i++)
+                    for (int i = 0; i < shootAt.Count; i++) 
                     {
                         //shoots a projectile att every projectile spawnpoint
-                        shoot(shootAt[i].transform.position);
+                        shoot(shootAt[i].transform.position, shootAt[i].transform.rotation);
                         StartCoroutine(allowProjectile());
                         alloowshoot = false;
                     }
@@ -102,10 +107,10 @@ public class Shooting : MonoBehaviour
         ammoScreenn.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
     }
 
-    void shoot(Vector2 where)
+    void shoot(Vector2 where, Quaternion rotation)
     {
         //instaniates the projectile
-        Instantiate(projectile[currentProjectile], where, transform.rotation);
+        Instantiate(projectile[currentProjectile], where, rotation);
     }
 
     //changes your projectile
