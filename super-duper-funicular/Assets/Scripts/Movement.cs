@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class Movement : MonoBehaviour
 {
 
-    float rotationSpeed = 200;
+    public float rotationSpeed = 200;
     public bool allowMovement;
     public bool moveForward;
-    [SerializeField] float movementSpeed = 5;
+    public  float movementSpeed = 5;
     float baseMovementSpeed = 5;
 
 
@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     {
 
         Application.targetFrameRate = 60;
-
+        
 
     }
 
@@ -37,6 +37,11 @@ public class Movement : MonoBehaviour
         if (restart)
         {
             Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);    
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            movementSpeed = 0;
         }
 
            

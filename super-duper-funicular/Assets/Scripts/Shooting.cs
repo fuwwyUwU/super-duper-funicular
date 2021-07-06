@@ -6,7 +6,6 @@ public class Shooting : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI ammoScreenn;
-    Rigidbody2D rb;
     Rigidbody2D _rb;
     [SerializeField] GameObject[] projectile;
     public int currentProjectile = 1;
@@ -47,7 +46,7 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         projectileSpawner = GameObject.Find("Projectle Spawn Point");
         if (projectileSpawner != null)
         {
@@ -100,7 +99,7 @@ public class Shooting : MonoBehaviour
 
 
         //updates the ammo counter
-        ammoScreenn.text = "Ammo: " + currentAmmo;
+        ammoScreenn.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
     }
 
     void shoot(Vector2 where)
@@ -116,8 +115,15 @@ public class Shooting : MonoBehaviour
         Projectiles _projectileProperties = projectile[changeTo].gameObject.GetComponent<Projectiles>(); ;
 
         currentProjectile = changeTo;
+
+        if (_projectileProperties != null) Debug.Log("worked");
         
         ProjectileChange(changeTo, _projectileProperties);
+
+        if (changeTo != 0) Debug.Log("worrrrrrked");
+
+
+
 
 
 

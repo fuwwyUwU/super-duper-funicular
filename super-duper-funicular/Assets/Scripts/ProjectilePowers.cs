@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectilePowers : MonoBehaviour
 {
     public bool cloneBool;
-
+    public bool stopBool;
 
     void Start()
     {
@@ -14,10 +14,10 @@ public class ProjectilePowers : MonoBehaviour
 
     public void Clone()
     {
-        Instantiate(gameObject);
+
+        transform.Rotate(Vector3.forward * 20);
+
+        
     }
-
-
-
 
 }

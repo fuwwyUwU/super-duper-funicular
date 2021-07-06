@@ -46,7 +46,7 @@ public class Projectiles : MonoBehaviour
         {
             powers.Clone();
         }
-
+        
     }
 
     private void FixedUpdate()
