@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
         //current health minus health from last second
         timeBefore -= timeAfter;
         //logs the dps
-        Debug.Log(timeBefore * -1);
+
         //sets the health for the next second 
         timeAfter = health;
     }
