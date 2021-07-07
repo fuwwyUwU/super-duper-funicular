@@ -13,7 +13,6 @@ public class Movement : MonoBehaviour
     float baseMovementSpeed = 5;
     public InputMaster controls;
     Vector3 moveWhere;
-    bool move;
     float rotateDirection;
 
 
@@ -36,9 +35,6 @@ public class Movement : MonoBehaviour
 
     private void Awake()
     {
-
-        Application.targetFrameRate = 120;
-
         controls = new InputMaster();
         controls.Player.Movement.performed += ctx => MovementInputHandler(ctx.ReadValue<float>());
 
@@ -49,19 +45,6 @@ public class Movement : MonoBehaviour
     void MovementInputHandler(float where)
     {
 
-       if (where != 0)
-        {
-            move = true;
-            rotateDirection = where;
-            moveWhere = new Vector3(0, 0, where);
-        }
-        else
-        {
-            move = false;
-            moveWhere = new Vector3(0, 0, 0);
-        }
-
-        
 
 
     }
@@ -74,22 +57,26 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void FixedUpdate()
     {
 
         //moves the player forward
+
+        float currentRotation = controls.Player.Movement.ReadValue<float>();
+        Vector3 moveWith= new Vector3(0, 0, currentRotation);
         
         if (allowMovement)
         {
             transform.Translate(Vector2.up * (movementSpeed * Time.deltaTime));
         }
 
-        if (allowMovement && move)
+        if (allowMovement)
         {
-            transform.Rotate(moveWhere * (rotationSpeed * Time.deltaTime));
+            transform.Rotate((moveWith).normalized * (rotationSpeed * Time.deltaTime));
+            Debug.Log((moveWith).normalized);
         }
 
 

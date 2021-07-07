@@ -14,13 +14,17 @@ public class Shooting : MonoBehaviour
     [SerializeField] float currentAmmo = 0;
     [SerializeField] float maxAmmo = 100;
     [SerializeField] float timeBetweenShoots = 1;
-    float timeToReload = 0;
+    [SerializeField] float timeToReload = 0;
     [SerializeField] bool alloowshoot;
     Movement _playerMovement;
-    bool shooting = false;
     // Start is called before the first frame update
     void Start()
     {
+        //actiavets the input system
+        _playerMovement = GetComponent<Movement>();
+        _playerMovement.controls.Player.Shoot.performed += ctx => ShootingInputHandler(ctx.ReadValue<float>());
+        _playerMovement.controls.Player.Reload.performed += ctx => Reload();
+
         //allows you to shoot
         alloowshoot = true;
         //creats a list of positions where do projectiles will be instansiated
@@ -41,40 +45,21 @@ public class Shooting : MonoBehaviour
         
         //fills up the ammo
             currentAmmo = maxAmmo;
-
-            //changes the projectile
-            ChangeProjectile(1);
-        
-
-
+       
         //fills up the ammo
         currentAmmo = maxAmmo;
 
         //changes the projectile
-        ChangeProjectile(1);
+        ChangeProjectile(currentProjectile); 
     }
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerMovement = GetComponent<Movement>();
-        _playerMovement.controls.Player.Shoot.performed += ctx => ShootingInputHandler(ctx.ReadValue<float>());  
-        _playerMovement.controls.Player.Reload.performed += ctx => Reload(); 
     }
 
     void ShootingInputHandler(float pressed)
     {
-        Debug.Log(pressed);
-
-        if (pressed != 0)
-        {
-            shooting = true;    
-
-        }
-        else
-        {
-            shooting = false;
-        }
 
     }
 
@@ -89,8 +74,8 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
+        var shooting = _playerMovement.controls.Player.Shoot.ReadValue<float>() != 0;
 
         //if you are pressing shooting, shoot
         if (!alloowshoot) return;
