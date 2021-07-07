@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ed1fb048e05c498b0dbebc269aa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 10
   killAfter: 3
   ammoCost: 1
   betweenShoots: 0.2

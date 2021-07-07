@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class Movement : MonoBehaviour
 {
 
@@ -14,12 +15,45 @@ public class Movement : MonoBehaviour
     public InputMaster controls;
     Vector3 moveWhere;
     float rotateDirection;
-
+    CharacterController _cc;
+    Vector3 moveWith;
+    float shoot;
+    Shooting _shootingScript;
+    float reload;
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    void Move()
+    {
+        
+        
+            transform.Rotate((moveWith).normalized * (rotationSpeed * Time.deltaTime)); 
+        
+    }
+
+    void OnMovement(InputValue value)
+    {
+        Vector2 currentRotation = value.Get<Vector2>();
+        float currentRotationFloat = currentRotation.x;
+        moveWith = new Vector3(0, 0, -currentRotationFloat);
+
+
+    }
+
+    void OnShoot(InputValue value)
+    {
+        
+        shoot = value.Get<float>();
+    }
+
+    void OnReload(InputValue value)
+    {
+
+        reload = value.Get<float>();
     }
 
     private void OnEnable()
@@ -36,28 +70,30 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         controls = new InputMaster();
-        controls.Player.Movement.performed += ctx => MovementInputHandler(ctx.ReadValue<float>());
-
-
-
+        _shootingScript = GetComponent<Shooting>();
     }
 
-    void MovementInputHandler(float where)
-    {
-
-
-
-    }
-
-    void Test(float flo)
-    {
-        Debug.Log(flo);
-    }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (shoot != 0)
+        {
+            _shootingScript.shooting = true;
+        }
+        else
+        {
+            _shootingScript.shooting = false;
+        }
+
+        if (reload != 0)
+        {
+            _shootingScript.reloading = true;
+        }
+        else
+        {
+            _shootingScript.reloading = false;
+        }
     }
 
     private void FixedUpdate()
@@ -65,19 +101,13 @@ public class Movement : MonoBehaviour
 
         //moves the player forward
 
-        float currentRotation = controls.Player.Movement.ReadValue<float>();
-        Vector3 moveWith= new Vector3(0, 0, currentRotation);
         
         if (allowMovement)
         {
             transform.Translate(Vector2.up * (movementSpeed * Time.deltaTime));
+            Move();
         }
 
-        if (allowMovement)
-        {
-            transform.Rotate((moveWith).normalized * (rotationSpeed * Time.deltaTime));
-            Debug.Log((moveWith).normalized);
-        }
 
 
 

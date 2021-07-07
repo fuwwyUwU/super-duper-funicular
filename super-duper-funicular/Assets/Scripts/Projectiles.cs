@@ -57,6 +57,26 @@ public class Projectiles : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
+        //gets the health of the object it collided with
+        Health _health = collision.gameObject.GetComponent<Health>();
+        //logs that it collided
+        Debug.Log("collided");
+
+        //checks that the other object has a health class
+        if (_health == null) return;
+        else
+        {
+            //if it has a health class it changes the health
+            _health.ChangeHealth(projectileDamage);
+            Debug.Log("changed health" + _health.health);
+
+
+        }
+
+        //destroys itself
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

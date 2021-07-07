@@ -17,6 +17,9 @@ public class Shooting : MonoBehaviour
     [SerializeField] float timeToReload = 0;
     [SerializeField] bool alloowshoot;
     Movement _playerMovement;
+    bool hasAmooScreen;
+    public bool shooting;
+    public bool reloading;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,11 @@ public class Shooting : MonoBehaviour
         shootAt = new List<GameObject>();
 
             //adds all the locations it can be instansiated at
+
+        if (ammoScreenn == null)
+        {
+            hasAmooScreen = false;
+        }
 
 
         foreach (Transform transform in gameObject.transform)
@@ -75,8 +83,6 @@ public class Shooting : MonoBehaviour
     void Update()
     {
 
-        var shooting = _playerMovement.controls.Player.Shoot.ReadValue<float>() != 0;
-
         //if you are pressing shooting, shoot
         if (!alloowshoot) return;
         else if (shooting && currentAmmo >= ammoCost) //checks if you have enougth ammo to shoot
@@ -93,9 +99,17 @@ public class Shooting : MonoBehaviour
                     currentAmmo -= ammoCost;
                 }
 
-
+        if (hasAmooScreen)
+        {
+            ammoScreenn.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
+        }
         //updates the ammo counter
-        ammoScreenn.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
+
+        if (reloading)
+        {
+            Reload();
+        }
+
     }
 
     void shoot(Vector2 where, Quaternion rotation)
@@ -119,7 +133,6 @@ public class Shooting : MonoBehaviour
     //allows you to shoot again
     IEnumerator allowProjectile()
     {
-        Debug.Log("ran");
         yield return new WaitForSeconds(timeBetweenShoots);
         alloowshoot = true;
     }
@@ -130,7 +143,6 @@ public class Shooting : MonoBehaviour
 
         ammoCost = _project.ammoCost;
         timeBetweenShoots = _project.betweenShoots;
-        Debug.Log(ammoCost);
     }
 
     //reloads
